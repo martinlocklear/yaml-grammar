@@ -885,10 +885,9 @@ e-node: e-scalar
 nb-double-char:
 - '|'
 - c-ns-esc-char
-- - nb-json
-  - '-'
+- - '-'
+  - nb-json
   - \
-  - '-'
   - '"'
 
 
@@ -992,8 +991,8 @@ c-quoted-quote:
 nb-single-char:
 - '|'
 - c-quoted-quote
-- - nb-json
-  - '-'
+- - '-'
+  - nb-json
   - ''''
 
 
@@ -1071,8 +1070,8 @@ nb-single-multi-line(n):
 # <followed_by_an_ns-plain-safe(c)> )
 ns-plain-first(c):
 - '|'
-- - ns-char
-  - '-'
+- - '-'
+  - ns-char
   - c-indicator
 - <followed_by_an_ns-plain-safe(c)>
 - - '|'
@@ -1112,10 +1111,9 @@ ns-plain-safe-in:
 # | ( ':' <followed_by_an_ns-plain-safe(c)> )
 ns-plain-char(c):
 - '|'
-- - ns-plain-safe(c)
-  - '-'
+- - '-'
+  - ns-plain-safe(c)
   - ':'
-  - '-'
   - '#'
 - - <an_ns-char_preceding>
   - '#'
