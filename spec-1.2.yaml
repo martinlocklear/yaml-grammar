@@ -789,14 +789,14 @@ ns-global-tag-prefix:
 # ( s-separate(n,c) c-ns-tag-property )? )
 c-ns-properties(n,c):
 - '|'
-- - - c-ns-tag-property
+- - c-ns-tag-property
   - - '?'
     - s-separate(n,c)
     - c-ns-anchor-property
-- c-ns-anchor-property
-- - '?'
-  - s-separate(n,c)
-  - c-ns-tag-property
+- - c-ns-anchor-property
+  - - '?'
+    - s-separate(n,c)
+    - c-ns-tag-property
 
 
 ##### 6.9.1. Node Tags
@@ -962,9 +962,9 @@ s-double-next-line(n):
 - - '?'
   - ns-double-char
   - nb-ns-double-in-line
-- - '|'
-  - s-double-next-line(n)
-  - s-white*
+  - - '|'
+    - s-double-next-line(n)
+    - s-white*
 
 
 # [116] nb-double-multi-line(n) ::=
@@ -1047,9 +1047,9 @@ s-single-next-line(n):
 - - '?'
   - ns-single-char
   - nb-ns-single-in-line
-- - '|'
-  - s-single-next-line(n)
-  - s-white*
+  - - '|'
+    - s-single-next-line(n)
+    - s-white*
 
 
 # [125] nb-single-multi-line(n) ::=
@@ -1073,11 +1073,11 @@ ns-plain-first(c):
 - - '-'
   - ns-char
   - c-indicator
-- <followed_by_an_ns-plain-safe(c)>
-- - '|'
-  - '?'
-  - ':'
-  - '-'
+- - - '|'
+    - '?'
+    - ':'
+    - '-'
+  - <followed_by_an_ns-plain-safe(c)>
 
 
 # [127] ns-plain-safe(c) ::=
@@ -1283,9 +1283,9 @@ ns-flow-map-implicit-entry(n,c):
 ns-flow-map-yaml-key-entry(n,c):
 - ns-flow-yaml-node(n,c)
 - - '|'
+  - - s-separate(n,c)?
+    - c-ns-flow-map-separate-value(n,c)
   - e-node
-- - s-separate(n,c)?
-  - c-ns-flow-map-separate-value(n,c)
 
 
 # [146] c-ns-flow-map-empty-key-entry(n,c) ::=
@@ -1304,9 +1304,9 @@ c-ns-flow-map-separate-value(n,c):
 - ':'
 - <not_followed_by_an_ns-plain-safe(c)>
 - - '|'
+  - - s-separate(n,c)
+    - ns-flow-node(n,c)
   - e-node
-- - s-separate(n,c)
-  - ns-flow-node(n,c)
 
 
 # [148] c-ns-flow-map-json-key-entry(n,c) ::=
@@ -1317,9 +1317,9 @@ c-ns-flow-map-separate-value(n,c):
 c-ns-flow-map-json-key-entry(n,c):
 - c-flow-json-node(n,c)
 - - '|'
+  - - s-separate(n,c)?
+    - c-ns-flow-map-adjacent-value(n,c)
   - e-node
-- - s-separate(n,c)?
-  - c-ns-flow-map-adjacent-value(n,c)
 
 
 # [149] c-ns-flow-map-adjacent-value(n,c) ::=
@@ -1330,9 +1330,9 @@ c-ns-flow-map-json-key-entry(n,c):
 c-ns-flow-map-adjacent-value(n,c):
 - ':'
 - - '|'
+  - - s-separate(n,c)?
+    - ns-flow-node(n,c)
   - e-node
-- - s-separate(n,c)?
-  - ns-flow-node(n,c)
 
 
 # [150] ns-flow-pair(n,c) ::=
@@ -1431,11 +1431,11 @@ ns-flow-yaml-node(n,c):
 - '|'
 - c-ns-alias-node
 - ns-flow-yaml-content(n,c)
-- c-ns-properties(n,c)
-- - '|'
-  - e-scalar
-- - s-separate(n,c)
-  - ns-flow-yaml-content(n,c)
+- - c-ns-properties(n,c)
+  - - '|'
+    - - s-separate(n,c)
+      - ns-flow-yaml-content(n,c)
+    - e-scalar
 
 
 # [160] c-flow-json-node(n,c) ::=
@@ -1460,11 +1460,11 @@ ns-flow-node(n,c):
 - '|'
 - c-ns-alias-node
 - ns-flow-content(n,c)
-- c-ns-properties(n,c)
-- - '|'
-  - e-scalar
-- - s-separate(n,c)
-  - ns-flow-content(n,c)
+- - c-ns-properties(n,c)
+  - - '|'
+    - - s-separate(n,c)
+      - ns-flow-content(n,c)
+    - e-scalar
 
 
 ### 8.1. Block Scalar Styles
@@ -1478,11 +1478,11 @@ ns-flow-node(n,c):
 # c-indentation-indicator(m) ) )
 # s-b-comment
 c-b-block-header(m,t):
-- '|'
-- - c-indentation-indicator(m)
-  - c-chomping-indicator(t)
-- - c-chomping-indicator(t)
-  - c-indentation-indicator(m)
+- - '|'
+  - - c-indentation-indicator(m)
+    - c-chomping-indicator(t)
+  - - c-chomping-indicator(t)
+    - c-indentation-indicator(m)
 - s-b-comment
 
 
@@ -1732,7 +1732,7 @@ c-l-block-seq-entry(n):
 # | ( e-node s-l-comments )
 s-l+block-indented(n,c):
 - '|'
-- - - s-indent(m)
+- - s-indent(m)
   - - '|'
     - ns-l-compact-sequence(n+1+m)
     - ns-l-compact-mapping(n+1+m)
@@ -1830,8 +1830,8 @@ c-l-block-map-implicit-value(n):
 - ':'
 - - '|'
   - s-l+block-node(n,block-out)
-- - e-node
-  - s-l-comments
+  - - e-node
+    - s-l-comments
 
 
 # [195] ns-l-compact-mapping(n) ::=
@@ -1977,8 +1977,8 @@ l-explicit-document:
 - c-directives-end
 - - '|'
   - l-bare-document
-- - e-node
-  - s-l-comments
+  - - e-node
+    - s-l-comments
 
 
 ##### 9.1.5. Directives Documents
