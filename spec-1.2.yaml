@@ -1788,7 +1788,7 @@ c-l-block-map-explicit-entry(n):
 # '?'
 # s-l+block-indented(n,block-out)
 c-l-block-map-explicit-key(n):
-- '?'
+- \?
 - s-l+block-indented(n,block-out)
 
 
