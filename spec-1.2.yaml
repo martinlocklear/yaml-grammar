@@ -860,7 +860,7 @@ ns-anchor-name: ns-anchor-char+
 # [104] c-ns-alias-node ::=
 # '*' ns-anchor-name
 c-ns-alias-node:
-- '*'
+- \*
 - ns-anchor-name
 
 
@@ -1074,7 +1074,7 @@ ns-plain-first(c):
   - ns-char
   - c-indicator
 - - - '|'
-    - '?'
+    - \?
     - ':'
     - '-'
   - <followed_by_an_ns-plain-safe(c)>
@@ -1247,7 +1247,7 @@ ns-s-flow-map-entries(n,c):
 # | ns-flow-map-implicit-entry(n,c)
 ns-flow-map-entry(n,c):
 - '|'
-- - '?'
+- - \?
   - s-separate(n,c)
   - ns-flow-map-explicit-entry(n,c)
 - ns-flow-map-implicit-entry(n,c)
@@ -1341,7 +1341,7 @@ c-ns-flow-map-adjacent-value(n,c):
 # | ns-flow-pair-entry(n,c)
 ns-flow-pair(n,c):
 - '|'
-- - '?'
+- - \?
   - s-separate(n,c)
   - ns-flow-map-explicit-entry(n,c)
 - ns-flow-pair-entry(n,c)
@@ -1577,7 +1577,7 @@ l-trail-comments(n):
 # '|' c-b-block-header(m,t)
 # l-literal-content(n+m,t)
 c-l+literal(n):
-- '|'
+- \|
 - c-b-block-header(m,t)
 - l-literal-content(n+m,t)
 
